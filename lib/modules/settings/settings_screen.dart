@@ -49,12 +49,25 @@ class SettingsScreen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 5.0,
+          ),
           Text('Eman Saeed',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Text('bio ...',
             style: Theme.of(context).textTheme.caption,
-          )
+          ),
+          Row(
+            children: [
+              Text('100',
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              Text('posts',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ],
+          ),
 
         ],
 

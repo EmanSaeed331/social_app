@@ -22,7 +22,7 @@ jobs:
         with:
           flutter-version: '2.5.3'
       - run: flutter pub get
-      - run: flutter build apk --split-per-abi --no-sound-null-safety
+      - run: flutter build apk --release --no-sound-null-safety
 
       - name: Push to Releases
         uses: ncipollo/release-action@v1
