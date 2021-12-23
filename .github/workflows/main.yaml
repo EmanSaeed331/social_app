@@ -1,4 +1,4 @@
-name: Flutter CI
+name: "Build & Release"
 on:
   push:
     branches:
