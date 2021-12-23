@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socialapp/shared/components/components.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
@@ -58,13 +59,89 @@ class SettingsScreen extends StatelessWidget {
           Text('bio ...',
             style: Theme.of(context).textTheme.caption,
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 20.0,
+
+            ),
+            child: Row(
+              children: [
+                Expanded(
+
+                  child: InkWell(
+                    onTap:(){},
+                    child: Column(
+                      children: [
+                        Text('100',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        Text('posts',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+
+                  child: InkWell(
+                    onTap:(){},
+                    child: Column(
+                      children: [
+                        Text('100',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        Text('posts',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+
+                  child: InkWell(
+                    onTap:(){},
+                    child: Column(
+                      children: [
+                        Text('100',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        Text('posts',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+
+                  child: InkWell(
+                    onTap:(){},
+                    child: Column(
+                      children: [
+                        Text('100',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                        Text('posts',
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+
+              ],
+            ),
+          ),
           Row(
             children: [
-              Text('100',
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              Text('posts',
-                style: Theme.of(context).textTheme.caption,
+              Expanded(
+                  child: defaultButton(
+                    function: (){},
+                    text: 'Edit Profile',
+                  ),
               ),
             ],
           ),
