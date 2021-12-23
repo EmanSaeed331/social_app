@@ -55,12 +55,14 @@ class SocialRegisterCubit extends Cubit<RegisterStates> {
     @required String name,
     @required String phone,
     @required String uId,
+
   }) {
     SocialUserModel model = SocialUserModel(
       email: email,
       name: name,
       phone: phone,
       uId: uId,
+      bio:'write your bio...',
       isEmailVerified: false,
     );
     FirebaseFirestore.instance
