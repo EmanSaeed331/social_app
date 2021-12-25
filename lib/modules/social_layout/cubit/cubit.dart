@@ -59,6 +59,7 @@ class SocialCubit extends Cubit<SocialStates> {
   }
 
   File profileImage ;
+  File coverImage;
   var picker = ImagePicker();
   Future<void> getProfileImage () async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -68,6 +69,18 @@ class SocialCubit extends Cubit<SocialStates> {
     }
     else{
       emit(SocialProfileImagePickedErrorState());
+      print('No Image Selected');
+    }
+
+  }
+  Future<void> getCoverImage () async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null){
+      coverImage = File(pickedFile.path);
+      emit(SocialCoverImagePickedSuccessState());
+    }
+    else{
+      emit(SocialCoverImagePickedErrorState());
       print('No Image Selected');
     }
 
