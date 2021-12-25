@@ -14,7 +14,7 @@ import 'package:socialapp/shared/components/constants.dart';
 class SocialCubit extends Cubit<SocialStates> {
   SocialCubit() : super(SocialIntialState());
   static SocialCubit get(context) => BlocProvider.of(context);
-  SocialUserModel model;
+  SocialUserModel userModel;
   int currentIndex = 0;
   List<Widget> screens = [
     FeedsScreen(),
@@ -47,7 +47,7 @@ class SocialCubit extends Cubit<SocialStates> {
     emit(SocialGetUserLoadingState());
     FirebaseFirestore.instance.collection('Users').doc(uId).get().then((value) {
       print(value.data());
-      model = SocialUserModel.fromJson(value.data());
+      userModel = SocialUserModel.fromJson(value.data());
       emit(SocialGetUserSuccessState());
     }).catchError((error) {
       print(error.toString());

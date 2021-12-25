@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:socialapp/shared/style/colors.dart';
+import 'package:socialapp/shared/style/icon_broken.dart';
 
 Widget defaultFormField({
   @required TextEditingController controller,
@@ -234,3 +235,22 @@ Widget buildListProduct(
         ),
       ),
     );
+Widget defaultAppBar({
+  @required BuildContext context,
+  String title ,
+  List <Widget> actions,
+}) => AppBar(
+  leading:IconButton(
+    onPressed: (){
+      Navigator.pop(context);
+    },
+    icon:Icon(
+      IconBroken.Arrow___Left_2,
+    ),
+  ),
+  titleSpacing: 5.0,
+  title :Text(
+      title,
+  ),
+  actions: actions,
+);
