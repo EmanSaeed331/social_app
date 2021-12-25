@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
 import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/shared/components/components.dart';
@@ -9,12 +12,14 @@ class EditProfileScreen extends StatelessWidget {
   var BioController = TextEditingController();
 
 
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit,SocialStates>(
       listener:(context,state){} ,
       builder: (context,state){
         var userModel = SocialCubit.get(context).userModel;
+        var profileImage = SocialCubit.get(context).profileImage;
         return Scaffold(
 
           appBar:defaultAppBar(
@@ -84,12 +89,13 @@ class EditProfileScreen extends StatelessWidget {
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                             child: CircleAvatar(
                               radius: 50.0,
-                              backgroundImage: NetworkImage(
-                                '${userModel.image}',                         ),
+                              backgroundImage: profileImage== null ? NetworkImage('${userModel.image}'):FileImage(profileImage),
                             ),
                           ),
                           IconButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              SocialCubit.get(context).getProfileImage();
+                            },
                             icon: CircleAvatar(
                               radius: 20.0,
                               child: Icon(
