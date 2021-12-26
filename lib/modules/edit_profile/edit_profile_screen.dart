@@ -226,7 +226,7 @@ class EditProfileScreen extends StatelessWidget {
                       if (value.isEmpty){
                         return 'phone must not be empty';
                       }
-                      return null ;
+                      return null;
                     },
                     label: 'Phone',
                     prefix: IconBroken.Call,

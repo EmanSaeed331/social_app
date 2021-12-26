@@ -293,6 +293,7 @@ void updateUserData({
   List<PostModel> posts = [];
   List<String> postsId  = [];
   List<int> likes  = [];
+  List<int> comments  = [];
 
   void getPosts(){
   FirebaseFirestore.instance
