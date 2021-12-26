@@ -28,3 +28,9 @@ class SocialUserUpdateErrorState extends SocialStates{}
 class SocialUserUpdateState extends SocialStates {}
 class SocialUserLoadingSuccessState extends SocialStates {}
 class SocialUserLoadingErrorState extends SocialStates {}
+
+
+class SocialCreatePostLoadingState extends SocialStates{}
+class SocialCreatePostSuccessState extends SocialStates{}
+
+class SocialCreatePostErrorState extends SocialStates {}
