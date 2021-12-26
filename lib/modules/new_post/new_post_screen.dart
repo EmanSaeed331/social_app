@@ -95,8 +95,6 @@ class NewPostScreen extends StatelessWidget {
                         image: DecorationImage(
                           image:FileImage(SocialCubit.get(context).postImage),
                           fit:BoxFit.cover,
-
-
                         ),
                       ),
                     ),
