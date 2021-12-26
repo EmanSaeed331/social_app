@@ -292,15 +292,25 @@ void updateUserData({
   }
   List<PostModel> posts = [];
   List<String> postsId  = [];
-void getPosts(){
+  List<int> likes  = [];
+
+  void getPosts(){
   FirebaseFirestore.instance
       .collection('posts')
       .get()
       .then((value)  {
         value.docs.forEach((element)
         {
-          postsId.add(element.id);
-          posts.add(PostModel.fromJson(element.data()));
+          element.reference
+          .collection('likes')
+          .get()
+          .then((value) {
+            likes.add(value.docs.length);
+            postsId.add(element.id);
+            posts.add(PostModel.fromJson(element.data()));
+          })
+          .catchError((error){});
+
         });
         emit(SocialGetPostsSuccessState());
   })

@@ -226,7 +226,7 @@ class FeedsScreen extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '0',
+                            '${SocialCubit.get(context).likes[index]}',
                             style: Theme.of(context).textTheme.caption,
                           ),
 
