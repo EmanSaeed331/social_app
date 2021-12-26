@@ -14,7 +14,8 @@ class FeedsScreen extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         return ConditionalBuilder(
-          condition:SocialCubit.get(context).posts.length >0,
+          condition:SocialCubit.get(context).posts.length  > 0
+              && SocialCubit.get(context).userModel != null ,
           builder: (context)=> SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
@@ -47,7 +48,7 @@ class FeedsScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder:(context,index)=>
-                      buildPostItem(SocialCubit.get(context).posts[index],context),
+                      buildPostItem(SocialCubit.get(context).posts[index],context,index),
                   itemCount: SocialCubit.get(context).posts.length,
                   separatorBuilder: (context,index) => SizedBox(
                     height: 8.0,
@@ -69,7 +70,7 @@ class FeedsScreen extends StatelessWidget {
     );
 
   }
-  Widget buildPostItem(PostModel model,context) =>Card(
+  Widget buildPostItem(PostModel model,context , index) =>Card(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
     margin: EdgeInsets.symmetric(
@@ -233,8 +234,9 @@ class FeedsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    onTap:(){},
+                    onTap:(){
 
+                    },
                   ),
                 ),
                 Expanded(
@@ -322,7 +324,15 @@ class FeedsScreen extends StatelessWidget {
 
                   ],
                 ),
-                onTap:(){},
+                onTap:(){
+                  SocialCubit
+                      .get(context)
+                      .likePost(
+                      SocialCubit
+                          .get(context)
+                          .postsId[index]
+                  );
+                },
 
               ),
 

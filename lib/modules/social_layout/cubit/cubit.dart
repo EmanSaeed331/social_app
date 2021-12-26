@@ -291,13 +291,15 @@ void updateUserData({
     });
   }
   List<PostModel> posts = [];
+  List<String> postsId  = [];
 void getPosts(){
   FirebaseFirestore.instance
       .collection('posts')
       .get()
       .then((value)  {
         value.docs.forEach((element)
-      {
+        {
+          postsId.add(element.id);
           posts.add(PostModel.fromJson(element.data()));
         });
         emit(SocialGetPostsSuccessState());
@@ -306,6 +308,23 @@ void getPosts(){
         emit(SocialGetPostsErrorState(error));
   });
 
+}
+void likePost(String postId)
+{
+  FirebaseFirestore.instance
+      .collection('posts')
+      .doc(postId)
+      .collection('likes')
+      .doc(userModel.uId)
+      .set({
+    'like':true,
+  })
+      .then((value) {
+        emit(SocialLikePostsSuccessState());
+  })
+      .catchError((error){
+        emit(SocialLikePostsErrorState(error.toString()));
+  });
 }
 
 }
