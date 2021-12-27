@@ -62,3 +62,12 @@ class SocialCommentPostsErrorState extends SocialStates {
   final String error;
   SocialCommentPostsErrorState(this.error);
 }
+/*Chat get users */
+class SocialGetAllUsersState extends SocialStates {}
+
+class SocialGetAllUserSuccessState extends SocialStates {}
+
+class SocialGetAllUserErrorState extends SocialStates {
+  final String error;
+  SocialGetAllUserErrorState(this.error);
+}

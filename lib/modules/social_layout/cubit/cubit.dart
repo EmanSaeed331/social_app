@@ -294,7 +294,23 @@ void updateUserData({
   List<String> postsId  = [];
   List<int> likes  = [];
   List<int> comments  = [];
+  List<SocialUserModel> users = [];
+  void getUsers(){
+    FirebaseFirestore
+        .instance
+        .collection('Users')
+        .get()
+        .then((value){
+          value.docs.forEach((element) {
+            users.add(SocialUserModel.fromJson(element.data()));
 
+          });
+          emit(SocialGetAllUserSuccessState());
+    })
+        .catchError((error){
+          emit(SocialGetAllUserErrorState(error));
+    });
+  }
   void getPosts(){
   FirebaseFirestore.instance
       .collection('posts')

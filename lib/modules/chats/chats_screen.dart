@@ -1,5 +1,7 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/models/social_user_model.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
 import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/shared/components/components.dart';
@@ -11,17 +13,21 @@ class ChatsScreen extends StatelessWidget {
     return BlocConsumer<SocialCubit,SocialStates>(
       listener: (context,state){},
       builder: (context,state){
-        return  ListView.separated(
-          physics: BouncingScrollPhysics(),
-            itemBuilder: (context,index)=>builChatItem(),
-            separatorBuilder: (context,index)=> myDivider(),
-            itemCount: 10);
+        return  ConditionalBuilder(
+          condition: SocialCubit.get(context).users.length > 0,
+          builder:(context) => ListView.separated(
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context,index)=>builChatItem(SocialCubit.get(context).users[index]),
+              separatorBuilder: (context,index)=> myDivider(),
+              itemCount: SocialCubit.get(context).users.length),
+          fallback:(context)=>Center(child: CircularProgressIndicator()) ,
+        );
       },
 
     );
 
   }
-  Widget builChatItem () => InkWell(
+  Widget builChatItem (SocialUserModel model ) => InkWell(
     onTap: (){},
     child: Padding(
       padding: const EdgeInsets.all(20.0),
@@ -30,11 +36,11 @@ class ChatsScreen extends StatelessWidget {
           CircleAvatar(
             radius: 25.0,
             backgroundImage: NetworkImage(
-                'https://image.freepik.com/free-photo/image-young-business-woman-apologizing-shrugging-shoulders-looking-confused-dont-know-standing-white_176420-41076.jpg'          ),
+                '${model.image}'        ),
           ),
           SizedBox(width: 15,),
           Text(
-            'Eman Saeed',
+            '${model.name}',
             style: TextStyle(
                 height:1.4
             ),
