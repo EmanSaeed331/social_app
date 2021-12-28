@@ -22,7 +22,7 @@ void main() async {
   await Firebase.initializeApp();
   await CacheHelper.init();
   var token =  await FirebaseMessaging.instance.getToken();
-  print(token);
+  print('tokennnn'+'  '+token);
   FirebaseMessaging.onMessage.listen((event) {
     print(event.data.toString());
     showToast(text: 'On Message', state: ToastStates.SUCCESS);
