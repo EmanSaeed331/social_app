@@ -25,8 +25,12 @@ void main() async {
   print(token);
   FirebaseMessaging.onMessage.listen((event) {
     print(event.data.toString());
+    showToast(text: 'On Message', state: ToastStates.SUCCESS);
+
   });
   FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    showToast(text: 'On Message Opened app ', state: ToastStates.SUCCESS);
+
     print(event.data.toString());
   });
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
