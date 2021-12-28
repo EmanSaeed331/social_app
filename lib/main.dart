@@ -20,6 +20,9 @@ void main() async {
   FirebaseMessaging.onMessage.listen((event) {
     print(event.data.toString());
   });
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print(event.data.toString());
+  });
   Bloc.observer = MyBlocObserver();
   Widget widget;
   uId = CacheHelper.getData(key: 'uId');
