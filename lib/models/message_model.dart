@@ -29,7 +29,7 @@ class MessageModel {
       'reciverId': reciverId,
       'dateTime': dateTime,
       'text': text,
-   
+
     };
   }
 }
