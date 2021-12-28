@@ -7,10 +7,16 @@ import 'package:socialapp/modules/login_screen/login_screen.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
 import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/modules/social_layout/social_layout.dart';
+import 'package:socialapp/shared/components/components.dart';
 import 'package:socialapp/shared/components/constants.dart';
 import 'package:socialapp/shared/network/local/cache_helper.dart';
 import 'package:socialapp/shared/style/theme.dart';
 
+Future <void> firebaseMessagingBackgroundHandler(RemoteMessage message){
+  print('On Background Message');
+  print(message.data.toString());
+  showToast(text: 'On Background messaging', state: ToastStates.SUCCESS);
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,6 +29,7 @@ void main() async {
   FirebaseMessaging.onMessageOpenedApp.listen((event) {
     print(event.data.toString());
   });
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   Bloc.observer = MyBlocObserver();
   Widget widget;
   uId = CacheHelper.getData(key: 'uId');
