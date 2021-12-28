@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:socialapp/models/social_user_model.dart';
+import 'package:socialapp/modules/chats/chat_details/chat_details_screen.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
 import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/shared/components/components.dart';
@@ -17,7 +18,7 @@ class ChatsScreen extends StatelessWidget {
           condition: SocialCubit.get(context).users.length > 0,
           builder:(context) => ListView.separated(
               physics: BouncingScrollPhysics(),
-              itemBuilder: (context,index)=>builChatItem(SocialCubit.get(context).users[index]),
+              itemBuilder: (context,index)=>builChatItem(SocialCubit.get(context).users[index] , context),
               separatorBuilder: (context,index)=> myDivider(),
               itemCount: SocialCubit.get(context).users.length),
           fallback:(context)=>Center(child: CircularProgressIndicator()) ,
@@ -27,8 +28,13 @@ class ChatsScreen extends StatelessWidget {
     );
 
   }
-  Widget builChatItem (SocialUserModel model ) => InkWell(
-    onTap: (){},
+  Widget builChatItem (SocialUserModel model,context ) =>
+      InkWell(
+    onTap: (){
+      navigateTo(context, ChatDetailsScreen(
+        userModel: model,
+      ));
+    },
     child: Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -36,7 +42,8 @@ class ChatsScreen extends StatelessWidget {
           CircleAvatar(
             radius: 25.0,
             backgroundImage: NetworkImage(
-                '${model.image}'        ),
+                '${model.image}'
+            ),
           ),
           SizedBox(width: 15,),
           Text(
