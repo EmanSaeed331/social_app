@@ -41,7 +41,7 @@ class ChatDetailsScreen extends StatelessWidget {
                 ),
               ),
               body: ConditionalBuilder(
-                condition: SocialCubit.get(context).messages.length > 0,
+                condition: true,
                 builder:(context) =>  Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
