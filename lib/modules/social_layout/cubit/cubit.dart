@@ -321,6 +321,7 @@ void updateUserData({
   void getPosts(){
   FirebaseFirestore.instance
       .collection('posts')
+      .orderBy('dateTime')
       .get()
       .then((value)  {
         value.docs.forEach((element)
