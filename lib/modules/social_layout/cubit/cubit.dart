@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:socialapp/models/message_model.dart';
 import 'package:socialapp/models/post_model.dart';
 import 'package:socialapp/models/social_user_model.dart';
 import 'package:socialapp/modules/chats/chats_screen.dart';
@@ -342,8 +343,8 @@ void updateUserData({
   });
 
 }
-void likePost(String postId)
-{
+  void likePost(String postId)
+    {
   FirebaseFirestore.instance
       .collection('posts')
       .doc(postId)
@@ -359,5 +360,50 @@ void likePost(String postId)
         emit(SocialLikePostsErrorState(error.toString()));
   });
 }
+  void SendMessage({
+    @required String receiverId,
+    @required String dateTime ,
+    @required String text,
+    })
+  {
+    //set sender chats
+    MessageModel model = MessageModel(
+      text: text,
+      senderId: userModel.uId,
+      receiverId: receiverId,
+      dateTime: dateTime,
+    );
+    FirebaseFirestore.instance
+    .collection('Users')
+    .doc(userModel.uId)
+    .collection('chats')
+    .doc(receiverId)
+    .collection('messages')
+    .add(model.toMap())
+    .then((value) {
+        emit(SocialSendMessageSuccessState());
+    })
+    .catchError((error){
+      emit(SocialSendMessageErrorState());
 
+
+    });
+    //set receiver chats
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(receiverId)
+        .collection('chats')
+        .doc(userModel.uId)
+        .collection('messages')
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialSendMessageSuccessState());
+    })
+        .catchError((error){
+      emit(SocialSendMessageErrorState());
+
+
+    });
+    
+  }
 }
