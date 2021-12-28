@@ -406,4 +406,27 @@ void updateUserData({
     });
     
   }
+  List<MessageModel>messages = [];
+  void getMessages({   @required String receiverId})
+  {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userModel.uId)
+        .collection('chats')
+        .doc(receiverId)
+        .collection('messages')
+        .orderBy('dateTime')
+        .snapshots()
+        .listen((event)
+    {
+        messages = [];
+        event.docs.forEach((element)
+        {
+          messages.add(MessageModel.fromJson(element.data()));
+
+        });
+        emit(SocialGetMessagesSuccessState());
+    });
+
+  }
 }
