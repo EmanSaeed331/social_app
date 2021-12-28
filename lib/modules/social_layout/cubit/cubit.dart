@@ -318,6 +318,7 @@ void updateUserData({
             emit(SocialGetAllUserErrorState(error));
       });
   }
+
   void getPosts(){
   FirebaseFirestore.instance
       .collection('posts')
