@@ -98,6 +98,7 @@ class ChatDetailsScreen extends StatelessWidget {
                                       receiverId: userModel.uId,
                                       dateTime: DateTime.now().toString(),
                                       text: messageController.text);
+                                  messageController.text = ' ';
                                 },
                                 child: Icon(
                                   IconBroken.Send,

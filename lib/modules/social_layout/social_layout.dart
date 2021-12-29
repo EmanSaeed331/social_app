@@ -28,14 +28,14 @@ class SocialLayout extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
             actions: [
-             IconButton(onPressed: (){},
-                icon: Icon(
-                  IconBroken.Notification
-                )),
-              IconButton(onPressed: (){},
-                  icon: Icon(
-                      IconBroken.Search
-                  )),
+             // IconButton(onPressed: (){},
+             //    icon: Icon(
+             //      IconBroken.Notification
+             //    )),
+             //  IconButton(onPressed: (){},
+             //      icon: Icon(
+             //          IconBroken.Search
+             //      )),
 
             ],
 
