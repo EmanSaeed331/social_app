@@ -4,6 +4,7 @@ import 'package:socialapp/shared/components/components.dart';
 import 'package:socialapp/shared/style/colors.dart';
 import 'package:socialapp/shared/style/icon_broken.dart';
 class CommentsScreen extends StatelessWidget {
+  var commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +12,20 @@ class CommentsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Comments'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Container(
-          child: ListView.separated(
-            shrinkWrap: true,
-              itemBuilder: (context,index) => BuildCommentItem(context),
-              separatorBuilder: (context,index)=> SizedBox(height: 20.0),
-              itemCount: 10),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Card(
+               child: ListView.separated(
+                  shrinkWrap: true,
+                    itemBuilder: (context,index) => BuildCommentItem(context),
+                    separatorBuilder: (context,index)=> SizedBox(height: 20.0),
+                    itemCount: 10),
+
+
 
     ),
+        ),
       )
     );
   }

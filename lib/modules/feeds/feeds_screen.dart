@@ -258,9 +258,14 @@ class FeedsScreen extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            '0 Comment',
-                            style: Theme.of(context).textTheme.caption,
+                          GestureDetector(
+                            onTap: (){
+                              navigateTo(context, CommentsScreen());
+                            },
+                            child: Text(
+                              'Comments',
+                              style: Theme.of(context).textTheme.caption,
+                            ),
                           ),
 
 
@@ -298,13 +303,8 @@ class FeedsScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 15,),
-                      GestureDetector(
-                        onTap: (){
-                          navigateTo(context, CommentsScreen());
-                        },
-                        child: Text('write a comment...',
-                          style:Theme.of(context).textTheme.caption,
-                        ),
+                      Text('write a comment...',
+                        style:Theme.of(context).textTheme.caption,
                       ),
                     ],
                   ),
