@@ -1,6 +1,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:socialapp/models/post_model.dart';
 import 'package:socialapp/modules/comments/comments_screen.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
@@ -308,7 +309,9 @@ class FeedsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onTap: (){},
+                  onTap: (){
+                    _openPopup(context);
+                  },
                 ),
               ),
               InkWell(
@@ -352,5 +355,29 @@ class FeedsScreen extends StatelessWidget {
 
     ),
   );
+  _openPopup(context) {
+    Alert(
+        context: context,
+        title: "Comment",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'write your comment here ',
+              ),
+            ),
+
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              "comment",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
+  }
 
 }
