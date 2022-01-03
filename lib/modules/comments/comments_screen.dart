@@ -171,11 +171,6 @@ class CommentsScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Icon(
-                              IconBroken.Heart,
-                              size: 16.0,
-                              color:Colors.red
-                          ),
                           SizedBox(
                             width: 5,
                           ),
@@ -202,18 +197,6 @@ class CommentsScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(
-                              IconBroken.Chat,
-                              size: 16.0,
-                              color:Colors.amber
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '0 Comment',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
 
 
                         ],
@@ -258,6 +241,21 @@ class CommentsScreen extends StatelessWidget {
                           style:Theme.of(context).textTheme.caption,
                         ),
                       ),
+                      SizedBox(width: 80,),
+
+                      Icon(
+                          IconBroken.Chat,
+                          size: 16.0,
+                          color:Colors.amber
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '0 Comment',
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+
                     ],
                   ),
                   onTap: (){},
@@ -267,18 +265,11 @@ class CommentsScreen extends StatelessWidget {
 
                 child:Row(
                   children: [
-                    Icon(
-                        IconBroken.Heart,
-                        size: 16.0,
-                        color:Colors.red
-                    ),
+
                     SizedBox(
                       width: 5,
                     ),
-                    Text(
-                      'Like',
-                      style: Theme.of(context).textTheme.caption,
-                    ),
+
 
 
                   ],
