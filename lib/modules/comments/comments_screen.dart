@@ -1,78 +1,30 @@
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:socialapp/models/post_model.dart';
-import 'package:socialapp/modules/comments/comments_screen.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
-import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/shared/components/components.dart';
 import 'package:socialapp/shared/style/colors.dart';
 import 'package:socialapp/shared/style/icon_broken.dart';
+class CommentsScreen extends StatelessWidget {
 
-class FeedsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer <SocialCubit,SocialStates>(
-      listener: (context,state){},
-      builder: (context,state){
-        return ConditionalBuilder(
-          condition:SocialCubit.get(context).posts.length  > 0
-              && SocialCubit.get(context).userModel != null ,
-          builder: (context)=> SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  elevation: 5.0,
-                  margin: EdgeInsets.all(8.0),
-                  child: Stack(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    children: [
-                      Image(
-                        image:NetworkImage(
-                          'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
-                        ),
-                        fit: BoxFit.cover,
-                        height: 200.0,
-                        width: double.infinity,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Communicate with friends ',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder:(context,index)=>
-                      buildPostItem(SocialCubit.get(context).posts[index],context,index),
-                  itemCount: SocialCubit.get(context).posts.length,
-                  separatorBuilder: (context,index) => SizedBox(
-                    height: 8.0,
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Comments'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Container(
+          child: ListView.separated(
+            shrinkWrap: true,
+              itemBuilder: (context,index) => BuildCommentItem(context),
+              separatorBuilder: (context,index)=> SizedBox(height: 20.0),
+              itemCount: 10),
 
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-
-              ],
-            ),
-          ),
-          fallback: (context)=> Center(child: CircularProgressIndicator()),
-
-        );
-      },
-
+    ),
+      )
     );
-
   }
-  Widget buildPostItem(PostModel model,context , index) =>Card(
+  Widget BuildCommentItem(context) =>Card(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
     margin: EdgeInsets.symmetric(
@@ -89,7 +41,7 @@ class FeedsScreen extends StatelessWidget {
               CircleAvatar(
                 radius: 25.0,
                 backgroundImage: NetworkImage(
-                    '${model.image}'
+                  'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
                 ),
               ),
               SizedBox(width: 15,),
@@ -100,7 +52,7 @@ class FeedsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${model.name}',
+                          'Eman Saeed',
                           style: TextStyle(
                               height:1.4
                           ),
@@ -116,7 +68,7 @@ class FeedsScreen extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      '${model.dateTime}',
+                      '12204984398',
                       style: Theme.of(context).textTheme.caption.copyWith(height: 1.4),
                     ),
                   ],
@@ -144,7 +96,7 @@ class FeedsScreen extends StatelessWidget {
             ),
           ),
           Text(
-            '${model.text}',
+              'comment ',
               style: Theme.of(context).textTheme.subtitle1
           ),
           Padding(
@@ -182,27 +134,27 @@ class FeedsScreen extends StatelessWidget {
               ),
             ),
           ),
-          if(model.postImage != '')
-            Padding(
-            padding: const EdgeInsetsDirectional.only(
-              top:15.0
-            ),
-            child: Container(
-              height: 140,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.0),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    '${model.postImage}'
-                  ),
-                  fit:BoxFit.cover,
-
-
-                ),
-              ),
-            ),
-          ),
+          // if(model.postImage != '')
+          //   Padding(
+          //     padding: const EdgeInsetsDirectional.only(
+          //         top:15.0
+          //     ),
+          //     child: Container(
+          //       height: 140,
+          //       width: double.infinity,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(4.0),
+          //         image: DecorationImage(
+          //           image: NetworkImage(
+          //               '${model.postImage}'
+          //           ),
+          //           fit:BoxFit.cover,
+          //
+          //
+          //         ),
+          //       ),
+          //     ),
+          //   ),
 
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -227,10 +179,10 @@ class FeedsScreen extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            '${SocialCubit.get(context).likes[index]}',
-                            style: Theme.of(context).textTheme.caption,
-                          ),
+                          // Text(
+                          //   '${SocialCubit.get(context).likes[index]}',
+                          //   style: Theme.of(context).textTheme.caption,
+                          // ),
 
 
                         ],
@@ -294,7 +246,7 @@ class FeedsScreen extends StatelessWidget {
                       CircleAvatar(
                         radius: 18.0,
                         backgroundImage: NetworkImage(
-                          '${SocialCubit.get(context).userModel.image}'
+                          'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
                         ),
                       ),
                       SizedBox(width: 15,),
@@ -302,7 +254,7 @@ class FeedsScreen extends StatelessWidget {
                         onTap: (){
                           navigateTo(context, CommentsScreen());
                         },
-                        child: Text('write a comment...',
+                        child: Text('Wrte now',
                           style:Theme.of(context).textTheme.caption,
                         ),
                       ),
@@ -332,13 +284,7 @@ class FeedsScreen extends StatelessWidget {
                   ],
                 ),
                 onTap:(){
-                  SocialCubit
-                      .get(context)
-                      .likePost(
-                      SocialCubit
-                          .get(context)
-                          .postsId[index]
-                  );
+
                 },
 
               ),
@@ -353,4 +299,5 @@ class FeedsScreen extends StatelessWidget {
     ),
   );
 
-}
+  }
+

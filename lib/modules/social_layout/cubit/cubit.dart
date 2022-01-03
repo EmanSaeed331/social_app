@@ -37,8 +37,6 @@ class SocialCubit extends Cubit<SocialStates> {
     'Settings'
   ];
   void changeBottomNav(int index) {
-
-
      if(index == 1){
       getUsers();
     }

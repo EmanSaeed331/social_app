@@ -44,6 +44,7 @@ class SocialLayout extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.currentIndex,
             onTap: (index) {
+
               cubit.changeBottomNav(index);
             },
             items: [
