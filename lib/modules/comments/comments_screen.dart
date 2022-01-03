@@ -220,68 +220,6 @@ class CommentsScreen extends StatelessWidget {
               color:Colors.grey[300],
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: InkWell(
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 18.0,
-                        backgroundImage: NetworkImage(
-                          'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
-                        ),
-                      ),
-                      SizedBox(width: 15,),
-                      GestureDetector(
-                        onTap: (){
-                          navigateTo(context, CommentsScreen());
-                        },
-                        child: Text('Wrte now',
-                          style:Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                      SizedBox(width: 80,),
-
-                      Icon(
-                          IconBroken.Chat,
-                          size: 16.0,
-                          color:Colors.amber
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '0 Comment',
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-
-                    ],
-                  ),
-                  onTap: (){},
-                ),
-              ),
-              InkWell(
-
-                child:Row(
-                  children: [
-
-                    SizedBox(
-                      width: 5,
-                    ),
-
-
-
-                  ],
-                ),
-                onTap:(){
-
-                },
-
-              ),
-
-            ],
-          ),
 
         ],
       ),
