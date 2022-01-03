@@ -431,4 +431,35 @@ void updateUserData({
     });
 
   }
+  void getComments({   @required String commenterId, String postId })
+  {
+    {
+      FirebaseFirestore.instance
+          .collection('posts')
+          .orderBy('dateTime')
+          .get()
+          .then((value)  {
+        value.docs.forEach((element)
+        {
+          element.reference
+              .collection('comments')
+              .get()
+              .then((value) {
+            comments.add(value.docs.length);
+            postsId.add(element.id);
+            posts.add(PostModel.fromJson(element.data()));
+          })
+              .catchError((error){});
+
+        });
+        emit(SocialGetPostsSuccessState());
+      })
+          .catchError((error){
+        emit(SocialGetPostsErrorState(error));
+      });
+
+    }
+
+
+  }
 }

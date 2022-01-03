@@ -11,6 +11,7 @@ import 'package:socialapp/shared/style/colors.dart';
 import 'package:socialapp/shared/style/icon_broken.dart';
 
 class FeedsScreen extends StatelessWidget {
+  var CommentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer <SocialCubit,SocialStates>(
@@ -232,8 +233,6 @@ class FeedsScreen extends StatelessWidget {
                             '${SocialCubit.get(context).likes[index]}',
                             style: Theme.of(context).textTheme.caption,
                           ),
-
-
                         ],
                       ),
                     ),
@@ -261,15 +260,13 @@ class FeedsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: (){
-                              navigateTo(context, CommentsScreen());
+                              navigateTo(context, CommentsScreen(comment:CommentController.text, userModel:SocialCubit.get(context).userModel ));
                             },
                             child: Text(
                               'Comments',
                               style: Theme.of(context).textTheme.caption,
                             ),
                           ),
-
-
                         ],
                       ),
                     ),
@@ -362,6 +359,7 @@ class FeedsScreen extends StatelessWidget {
         content: Column(
           children: <Widget>[
             TextField(
+              controller: CommentController,
               decoration: InputDecoration(
                 labelText: 'write your comment here ',
               ),
@@ -371,7 +369,7 @@ class FeedsScreen extends StatelessWidget {
         ),
         buttons: [
           DialogButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => navigateTo(context, CommentsScreen(comment:CommentController.text, userModel:SocialCubit.get(context).userModel )),
             child: Text(
               "comment",
               style: TextStyle(color: Colors.white, fontSize: 20),

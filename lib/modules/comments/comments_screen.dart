@@ -1,35 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:socialapp/models/social_user_model.dart';
 import 'package:socialapp/modules/social_layout/cubit/cubit.dart';
+import 'package:socialapp/modules/social_layout/cubit/states.dart';
 import 'package:socialapp/shared/components/components.dart';
 import 'package:socialapp/shared/style/colors.dart';
 import 'package:socialapp/shared/style/icon_broken.dart';
 class CommentsScreen extends StatelessWidget {
   var commentController = TextEditingController();
+  SocialUserModel userModel;
+  String comment;
+  CommentsScreen({this.userModel,this.comment});
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Comments'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Card(
-               child: ListView.separated(
-                  shrinkWrap: true,
-                    itemBuilder: (context,index) => BuildCommentItem(context),
-                    separatorBuilder: (context,index)=> SizedBox(height: 20.0),
-                    itemCount: 10),
+    return Builder(
+      builder: (BuildContext context) {
 
-
-
-    ),
-        ),
-      )
+        //  SocialCubit.get(context).getComments(commenterId: userModel.uId);
+        return BlocConsumer<SocialCubit , SocialStates>(
+          listener: (context,state){},
+          builder: (context,state){
+            return Scaffold(
+                appBar: AppBar(
+                  title: Text('Comments'),
+                ),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context,index) => BuildCommentItem(userModel,context),
+                        separatorBuilder: (context,index)=> SizedBox(height: 20.0),
+                        itemCount:  3 ,
+                  ),
+                )
+            ));
+          },
+        );
+      }
     );
   }
-  Widget BuildCommentItem(context) =>Card(
+  Widget BuildCommentItem(SocialUserModel model,context ) =>Card(
+
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
     margin: EdgeInsets.symmetric(
@@ -46,7 +60,7 @@ class CommentsScreen extends StatelessWidget {
               CircleAvatar(
                 radius: 25.0,
                 backgroundImage: NetworkImage(
-                  'https://image.freepik.com/free-photo/horizontal-shot-smiling-curly-haired-woman-indicates-free-space-demonstrates-place-your-advertisement-attracts-attention-sale-wears-green-turtleneck-isolated-vibrant-pink-wall_273609-42770.jpg',
+                  '${model.image}'
                 ),
               ),
               SizedBox(width: 15,),
@@ -57,7 +71,7 @@ class CommentsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Eman Saeed',
+                          '${model.name}',
                           style: TextStyle(
                               height:1.4
                           ),
@@ -101,7 +115,7 @@ class CommentsScreen extends StatelessWidget {
             ),
           ),
           Text(
-              'comment ',
+              '${comment} ',
               style: Theme.of(context).textTheme.subtitle1
           ),
           Padding(
