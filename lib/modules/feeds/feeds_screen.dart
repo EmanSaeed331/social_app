@@ -376,7 +376,16 @@ class FeedsScreen extends StatelessWidget {
               "comment",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
+          ),
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            color:Colors.grey,
+            child: Text(
+              "Cancel ",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           )
+
         ]).show();
   }
 
